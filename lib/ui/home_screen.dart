@@ -1,12 +1,8 @@
-import 'package:WeatherWise/app_url.dart';
 import 'package:WeatherWise/model/model.dart';
 import 'package:WeatherWise/ui/search_bar.dart';
 import 'package:WeatherWise/utils.dart';
-import 'package:WeatherWise/weatherdata.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,11 +20,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    print('having');
-    print(response);
-    if (response == null) {
-      loadLastWeatherData();
-    }
+
+    loadLastWeatherData();
   }
 
   @override
@@ -53,7 +46,9 @@ class _HomePageState extends State<HomePage> {
             children: [
               const SizedBox(height: 20),
               if (inProgress)
-                CircularProgressIndicator()
+                CircularProgressIndicator(
+                  color: Colors.black,
+                )
               else
                 Expanded(
                   child: SingleChildScrollView(child: buildWeatherWidget()),
@@ -89,7 +84,7 @@ class _HomePageState extends State<HomePage> {
               Text(
                 response?.location?.country ?? '',
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 12,
                   fontWeight: FontWeight.w300,
                 ),
               )
@@ -212,12 +207,12 @@ class _HomePageState extends State<HomePage> {
         });
       } else {
         setState(() {
-          message = "No previous weather data";
+          const Center(child: Text('No previous data find'));
         });
       }
     } catch (e) {
       setState(() {
-        message = "Failed to load weather data";
+        const Center(child: Text('Failed to load weather data'));
         response = null;
       });
     } finally {

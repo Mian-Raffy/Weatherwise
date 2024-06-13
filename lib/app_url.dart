@@ -38,9 +38,9 @@ class WeatherApi {
     inProgress = true;
 
     try {
-      response = await WeatherApi().getCurrentWeather(location);
+      response = await getCurrentWeather(location);
       if (response != null) {
-        await Utils().saveLastWeatherData(response!);
+        await response;
       } else {
         message = "Failed to get weather data";
       }

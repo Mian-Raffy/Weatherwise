@@ -32,15 +32,15 @@ class Utils {
 
   Future<void> saveLastWeatherData(ApiResponse response) async {
     final prefs = await SharedPreferences.getInstance();
-    String Data = jsonEncode(response.toJson());
-    await prefs.setString(_lastWeatherDataKey, Data);
+    String data = jsonEncode(response.toJson());
+    await prefs.setString(_lastWeatherDataKey, data);
   }
 
   Future<ApiResponse?> getLastWeatherData() async {
     final prefs = await SharedPreferences.getInstance();
-    String? Data = prefs.getString(_lastWeatherDataKey);
-    if (Data != null) {
-      return ApiResponse.fromJson(jsonDecode(Data));
+    String? data = prefs.getString(_lastWeatherDataKey);
+    if (data != null) {
+      return ApiResponse.fromJson(jsonDecode(data));
     }
     return null;
   }

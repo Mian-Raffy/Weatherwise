@@ -60,15 +60,15 @@ class SearchPageState extends State<SearchPage> {
               padding: const EdgeInsets.all(12.0),
               child: TextField(
                 onSubmitted: (value) {
+                  WeatherApi().getWeatherData(value);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => HomePage(),
                       ));
-                  WeatherApi().getWeatherData(value);
                 },
                 style: TextStyle(color: Colors.white),
-                cursorColor: Colors.amber,
+                cursorColor: Colors.white,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
