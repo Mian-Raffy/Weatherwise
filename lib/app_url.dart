@@ -16,39 +16,19 @@ class WeatherApi {
       final response = await http.get(Uri.parse(apiUrl));
       var data = jsonDecode(response.body);
 
+      print('API Response: $data'); // Add this to see the API response
+
       if (response.statusCode == 200) {
-        print(data);
-        Utils().saveLastSearchedLocation(location);
-        return ApiResponse.fromJson(
-            data); // Assuming ApiResponse has a fromJson method
+        Utils().saveLastWeatherData(ApiResponse.fromJson(data));
+        return ApiResponse.fromJson(data);
       } else {
-        // Log the response body for better debugging
         Utils().toastMessage(
             ' ${data['error']['message'] ?? 'Unknown error'} Please correct the spelling');
         return null;
       }
     } catch (e) {
-      // Log the error for better debugging
       Utils().toastMessage('Internet connection lost');
-      throw Exception(" $e");
-    }
-  }
-
-  getWeatherData(String location) async {
-    inProgress = true;
-
-    try {
-      response = await getCurrentWeather(location);
-      if (response != null) {
-        await response;
-      } else {
-        message = "Failed to get weather data";
-      }
-    } catch (e) {
-      message = "Failed to get weather";
-      response = null;
-    } finally {
-      inProgress = false;
+      throw Exception("Error: $e");
     }
   }
 }

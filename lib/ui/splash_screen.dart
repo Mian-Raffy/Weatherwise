@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 4), () {
+    Timer(const Duration(seconds: 4), () {
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -37,14 +37,16 @@ class _SplashScreenState extends State<SplashScreen> {
             width: 150.0,
             child: Image.asset('images/w.png'),
           )),
-          Center(
+          const Center(
             child: Text(
               "Weather Tracker...",
               style: TextStyle(
-                  decoration: TextDecoration.none,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  fontSize: 35),
+                decoration: TextDecoration.none,
+                fontWeight: FontWeight.bold,
+                color: Colors
+                    .black, // Make the text white so it's visible on the background
+                fontSize: 35,
+              ),
             ),
           ),
         ],
